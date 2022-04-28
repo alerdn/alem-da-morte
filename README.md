@@ -7,7 +7,7 @@ O Melhor Jogo feito pela melhor Equipe ▶
 
 ---
 ### Membros 👨‍💻
-Game Artist: André  
+> Game Artist: André  
 Developer: Alexandre  
 Game Designer / Game Producer: Alison e Felipe  
 Sound Designer: Gabriel  
