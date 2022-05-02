@@ -7,18 +7,21 @@ public class Bullet : MonoBehaviour
     public int damage = 1;
     public float speed = 1f;
     public float timeToReset = 5f;
-    public Rigidbody2D rb;
 
     void Update()
     {
-        // ver isso aqui Debug.Log(transform.rotation.z);
-        float rad = transform.rotation.z * Mathf.Deg2Rad;
-        Vector2 _aim = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
-        rb.velocity = _aim.normalized * speed;
+        Shoot();
     }
 
-    public void StartBullet()
+    private void Shoot()
     {
+        Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+        rb.AddForce(transform.up * speed, ForceMode2D.Impulse);
+    }
+
+    public void StartBullet(int damage)
+    {
+        this.damage = damage;
         Invoke(nameof(FinishUsage), timeToReset);
     }
 

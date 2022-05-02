@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletManager : Singleton<BulletManager>
+public class PlayerBulletManager : Singleton<PlayerBulletManager>
 {
     public GameObject bulletPrefab;
     public List<GameObject> bulletPool;

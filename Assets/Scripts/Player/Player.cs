@@ -5,7 +5,8 @@ using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    [Header("Weapon setup")]
+    public Weapon weapon;
 
     [Header("Movement setup")]
     public float moveSpeed = 10f;
@@ -18,17 +19,39 @@ public class Player : MonoBehaviour
     public float _activeSpeed;
     public float _dashCounter;
     private Vector2 _moveInput;
+    public Rigidbody2D _rb;
 
     private void Start()
     {
         _activeSpeed = moveSpeed;
+        _rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         HandleMovement();
         HandleRun();
+        HandleAttack();
+
+        if (Input.GetKeyDown(KeyCode.Q) && weapon != null)
+        {
+            Destroy(weapon.gameObject);
+            weapon = null;
+        }
+    }
+
+    private void FixedUpdate()
+    {
         HandleAim();
+    }
+
+    public void EquipWeapon(Weapon w)
+    {
+        w.gameObject.transform.rotation = gameObject.transform.rotation;
+        w.gameObject.transform.parent = gameObject.transform;
+        w.gameObject.transform.localPosition = new Vector2(-0.7f, 0.7f);
+
+        weapon = w;
     }
 
     private void HandleMovement()
@@ -41,7 +64,7 @@ public class Player : MonoBehaviour
 
         _moveInput.Normalize();
 
-        rb.velocity = _moveInput * _activeSpeed;
+        _rb.velocity = _moveInput * _activeSpeed;
     }
 
     private void HandleRun()
@@ -50,7 +73,6 @@ public class Player : MonoBehaviour
         {
             if (_dashCounter <= 0 && _moveInput.normalized != Vector2.zero)
             {
-                Debug.Log("Dashou");
                 _activeSpeed = dashSpeed;
                 _dashCounter = dashLength;
             }
@@ -70,12 +92,22 @@ public class Player : MonoBehaviour
 
     private void HandleAim()
     {
-        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        Vector2 direction = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - _rb.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        _rb.rotation = angle;
+        /*Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         
         // O ângulo varia de 180 a -180
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+        */
+    }
+
+    private void HandleAttack()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            weapon?.Attack();
+        }
     }
 }
