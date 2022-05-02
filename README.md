@@ -12,11 +12,11 @@ Sound Designer: Gabriel
 
 ---
 ### Tema
-> Mãe, pandemônio
+Mãe, pandemônio
 
 ### Gênero
-> Roguelike
+Roguelike
 
 ### Descrição
-> Você é um cientista buscando a cura para a doença terminal de sua mãe  
-> O único lugar que você encontrará o conhecimento em pouco tempo é no Submundo!
+Você é um cientista buscando a cura para a doença terminal de sua mãe  
+O único lugar que você encontrará o conhecimento em pouco tempo é no Submundo!
