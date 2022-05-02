@@ -1,11 +1,11 @@
 ## Play-Jam 🚀
-> O Melhor Jogo feito pela melhor Equipe ▶
+O Melhor Jogo feito pela melhor Equipe ▶
 
 ### Versão da Unity 🎮
-> 2020.3.2f1 LTS
+2020.3.2f1 LTS
 
 ### Membros 👨‍💻
-> Game Artist: André  
+Game Artist: André  
 Game Developer: Alexandre  
 Game Designer / Game Producer: Alison e Felipe  
 Sound Designer: Gabriel  
