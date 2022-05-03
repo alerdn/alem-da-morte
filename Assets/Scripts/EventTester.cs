@@ -9,7 +9,7 @@ public class EventTester : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             eventCallback?.Invoke();
         }

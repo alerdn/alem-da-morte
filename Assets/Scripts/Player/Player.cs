@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     [Header("Weapon setup")]
     public Weapon weapon;
+    public Transform aim;
 
     [Header("Movement setup")]
     public float moveSpeed = 10f;
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
         HandleMovement();
         HandleRun();
         HandleAttack();
+        HandleRealoadWeapon();
 
         if (Input.GetKeyDown(KeyCode.Q) && weapon != null)
         {
@@ -47,7 +49,8 @@ public class Player : MonoBehaviour
 
     public void EquipWeapon(Weapon w)
     {
-        if (weapon != null) {
+        if (weapon != null)
+        {
             Destroy(weapon.gameObject);
             weapon = null;
         }
@@ -98,15 +101,12 @@ public class Player : MonoBehaviour
 
     private void HandleAim()
     {
+
         Vector2 direction = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - _rb.position;
+        aim.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
         _rb.rotation = angle;
-        /*Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-        
-        // O ângulo varia de 180 a -180
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
-        */
     }
 
     private void HandleAttack()
@@ -114,6 +114,17 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             weapon?.Attack();
+        }
+    }
+
+    private void HandleRealoadWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (weapon is RangedWeapon)
+            {
+                ((RangedWeapon)weapon).ReloadWeapon();
+            }
         }
     }
 }
