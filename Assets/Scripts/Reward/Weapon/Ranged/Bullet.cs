@@ -32,6 +32,8 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.GetType() == this.GetType()) return;
+
         collision.gameObject.GetComponent<IDamageable>()?.Damage(damage);
         gameObject.SetActive(false);
     }

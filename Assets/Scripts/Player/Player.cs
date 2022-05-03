@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
 
     private void HandleAttack()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             weapon?.Attack();
         }

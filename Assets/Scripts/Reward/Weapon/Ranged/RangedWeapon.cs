@@ -10,11 +10,25 @@ public class RangedWeapon : Weapon
     public int cartridgeCapacity = 10;
     public int ammoAmount = 0;
 
-    private void Start() {
+    [Header("Stats")]
+    public float shootPerSeconds = 8f;
+    public float secondsToReload = 1f;
+
+    private Coroutine _isAttacking = null;
+    private Coroutine _isReloading = null;
+
+    private void Start()
+    {
         ReloadWeapon();
     }
 
     public override void Attack()
+    {
+        if (_isAttacking == null)
+            _isAttacking = StartCoroutine(Shoot());
+    }
+
+    IEnumerator Shoot()
     {
         if (ammoAmount > 0)
         {
@@ -30,15 +44,26 @@ public class RangedWeapon : Weapon
             }
         }
         else Debug.Log("Need to reload the gun!");
+
+        yield return new WaitForSeconds(1 / shootPerSeconds);
+        _isAttacking = null;
     }
 
     public void ReloadWeapon()
     {
+        if (_isReloading == null)
+            _isReloading = StartCoroutine(Reload());
+    }
+
+    IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(secondsToReload);
+
         int ammoToReload = 0;
         if (totalCapacity <= 0 || ammoAmount == cartridgeCapacity)
         {
             Debug.Log("No ammo left or cartridge is full");
-            return;
+            yield break;
         }
 
         /* Se tem municação de sobra, recarrega só o que cabe no cartucho*/
@@ -65,5 +90,6 @@ public class RangedWeapon : Weapon
         ammoAmount += ammoToReload;
 
         Debug.Log("Weapon realoded!");
+        _isReloading = null;
     }
 }

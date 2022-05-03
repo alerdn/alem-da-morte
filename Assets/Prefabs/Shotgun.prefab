@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4061573436327162371}
   - component: {fileID: 9032661809140805222}
   m_Layer: 0
-  m_Name: Energy Gun
+  m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,16 +58,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ab1ee93a5ce34439445ce51d054e61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Arma de Energia
-  description: "Uma arma do s\xE9culo XXX"
+  title: Arma Pesada
+  description: Dispara lentamente, mas muito mortal
   sprite: {fileID: 0}
-  damage: 1
+  damage: 4
   shootPoint: {fileID: 3045449577751106047}
-  totalCapacity: 30
-  cartridgeCapacity: 10
+  totalCapacity: 60
+  cartridgeCapacity: 5
   ammoAmount: 0
-  shootPerSeconds: 4
-  reloadSpeed: 0.5
+  shootPerSeconds: 2
+  secondsToReload: 1
 --- !u!61 &9032661809140805222
 BoxCollider2D:
   m_ObjectHideFlags: 0
