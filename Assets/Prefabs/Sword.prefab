@@ -278,6 +278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7145f241e746b4aa1b8d95a49ed1ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  title: Espada Divina
+  description: Uma espada ancestral
   damage: 1
   blade: {fileID: 0}
 --- !u!95 &3227446945974672612

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class Weapon : Reward
 {
     public int damage = 1;
 
@@ -12,7 +12,6 @@ public abstract class Weapon : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            Destroy(gameObject.GetComponent<BoxCollider2D>());
             GameManager.Instance.player.EquipWeapon(this);
         }
     }

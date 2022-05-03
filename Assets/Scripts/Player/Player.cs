@@ -47,6 +47,12 @@ public class Player : MonoBehaviour
 
     public void EquipWeapon(Weapon w)
     {
+        if (weapon != null) {
+            Destroy(weapon.gameObject);
+            weapon = null;
+        }
+
+        Destroy(w.gameObject.GetComponent<BoxCollider2D>());
         w.gameObject.transform.rotation = gameObject.transform.rotation;
         w.gameObject.transform.parent = gameObject.transform;
         w.gameObject.transform.localPosition = new Vector2(-0.7f, 0.7f);
