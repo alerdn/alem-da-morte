@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        HandleMovement();
+        GetMovimentDirection();
         HandleRun();
         HandleAttack();
         HandleRealoadWeapon();
@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        HandleMoviment();
         HandleAim();
     }
 
@@ -63,7 +64,7 @@ public class Player : MonoBehaviour
         weapon = w;
     }
 
-    private void HandleMovement()
+    private void GetMovimentDirection()
     {
         if (_dashCounter <= 0)
         {
@@ -72,7 +73,10 @@ public class Player : MonoBehaviour
         }
 
         _moveInput.Normalize();
+    }
 
+    private void HandleMoviment()
+    {
         _rb.velocity = _moveInput * _activeSpeed;
     }
 

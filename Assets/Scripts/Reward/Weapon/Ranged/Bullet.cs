@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     public float speed = 1f;
     public float timeToReset = 5f;
 
-    void Update()
+    void FixedUpdate()
     {
         Shoot();
     }
@@ -22,6 +22,7 @@ public class Bullet : MonoBehaviour
     public void StartBullet(int damage)
     {
         this.damage = damage;
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
         Invoke(nameof(FinishUsage), timeToReset);
     }
 
@@ -32,7 +33,12 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetType() == this.GetType()) return;
+
+        if (collision.gameObject.GetType() == this.GetType() || collision.transform.tag == "FloorLimit")
+        {
+            gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+            return;
+        }
 
         collision.gameObject.GetComponent<IDamageable>()?.Damage(damage);
         gameObject.SetActive(false);
