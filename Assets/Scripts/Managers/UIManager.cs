@@ -6,6 +6,8 @@ using TMPro;
 public class UIManager : Singleton<UIManager>
 {
     public GameObject rewardSelector;
+
+    [Header("HUD")]
     public TMP_Text weaponText;
 
     private void Update()
@@ -14,17 +16,10 @@ public class UIManager : Singleton<UIManager>
         if (player.weapon)
         {
             var w = player.weapon;
-            if (w is RangedWeapon)
-            {
-                RangedWeapon rw = (RangedWeapon)w;
-
-                weaponText.text = $"{rw.ammoAmount}/{rw.totalCapacity}\n{rw.title}";
-            }
-            else
-            {
-                weaponText.text = w.title;
-            }
-        } else {
+            weaponText.text = $"{w.ammoAmount}/{w.totalCapacity}\n{w.title}";
+        }
+        else
+        {
             weaponText.text = "";
         }
     }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4061573436327162371}
   - component: {fileID: 9032661809140805222}
   m_Layer: 0
-  m_Name: Energy Gun
+  m_Name: SubmachineGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,16 +58,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ab1ee93a5ce34439445ce51d054e61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Arma de Energia
-  description: "Uma arma do s\xE9culo XXX"
+  title: Metralhadora
+  description: Dispara rapidamente, mas causa pouco dano
   sprite: {fileID: 0}
   damage: 1
   shootPoint: {fileID: 3045449577751106047}
-  totalCapacity: 30
-  cartridgeCapacity: 10
+  maxCapacity: 160
+  cartridgeCapacity: 40
+  shootPerSeconds: 12
+  secondsToReload: 0.5
+  totalCapacity: 0
   ammoAmount: 0
-  shootPerSeconds: 4
-  secondsToReload: 1
 --- !u!61 &9032661809140805222
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -166,7 +167,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
-  m_Color: {r: 0.08597367, g: 0.40721378, b: 0.7924528, a: 1}
+  m_Color: {r: 0.08627448, g: 0.7921569, b: 0.2914583, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

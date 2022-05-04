@@ -7,16 +7,15 @@ public class SeekerAI : MonoBehaviour
 {
     [Header("IA setup")]
     public Transform target;
-    public float speed = 200f;
+    public float speed = 400f;
     public float nextWaypointDistance = 3f;
 
     private Path _path;
     private int _currentWaypoint = 0;
-    private bool _reachedEndOfPath = false;
+    //private bool _reachedEndOfPath = false;
     private Seeker _seeker;
     private Rigidbody2D _rb;
 
-    // Start is called before the first frame update
     void Start()
     {
         _seeker = GetComponent<Seeker>();
@@ -41,7 +40,6 @@ public class SeekerAI : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (_path == null)
@@ -51,12 +49,7 @@ public class SeekerAI : MonoBehaviour
 
         if (_currentWaypoint >= _path.vectorPath.Count)
         {
-            _reachedEndOfPath = true;
             return;
-        }
-        else
-        {
-            _reachedEndOfPath = false;
         }
 
         Vector2 direction = ((Vector2)_path.vectorPath[_currentWaypoint] - _rb.position).normalized;

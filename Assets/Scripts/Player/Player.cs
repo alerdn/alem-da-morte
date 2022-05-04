@@ -35,11 +35,12 @@ public class Player : Health
         HandleAttack();
         HandleRealoadWeapon();
 
+        /* Apenas DEV
         if (Input.GetKeyDown(KeyCode.Q) && weapon != null)
         {
             Destroy(weapon.gameObject);
             weapon = null;
-        }
+        }*/
     }
 
     private void FixedUpdate()
@@ -60,6 +61,7 @@ public class Player : Health
     }
     #endregion
 
+    #region Other commands
     public void EquipWeapon(Weapon w)
     {
         if (weapon != null)
@@ -75,6 +77,7 @@ public class Player : Health
 
         weapon = w;
     }
+    #endregion
 
     #region Handling movements
     private void GetMovimentDirection()
@@ -141,10 +144,7 @@ public class Player : Health
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if (weapon is RangedWeapon)
-            {
-                ((RangedWeapon)weapon).ReloadWeapon();
-            }
+            weapon.ReloadWeapon();
         }
     }
     #endregion
