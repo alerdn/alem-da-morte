@@ -17,10 +17,10 @@ public class Player : Health
     public float dashSpeed = 40f;
     public float dashLength = 0.5f;
 
-    public float _activeSpeed;
-    public float _dashCounter;
+    private float _activeSpeed;
+    private float _dashCounter;
     private Vector2 _moveInput;
-    public Rigidbody2D _rb;
+    private Rigidbody2D _rb;
 
     private void Start()
     {
@@ -52,7 +52,8 @@ public class Player : Health
     #region Health
     public override void Damage(int d)
     {
-        _currentHP -= d;
+        currentHP -= d;
+        if (currentHP <= 0) Kill();
     }
 
     public override void Kill()

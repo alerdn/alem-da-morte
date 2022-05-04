@@ -7,8 +7,9 @@ public class SeekerAI : MonoBehaviour
 {
     [Header("IA setup")]
     public Transform target;
-    public float speed = 400f;
+    public float speed = 1000f;
     public float nextWaypointDistance = 3f;
+    public bool isSeeking = false;
 
     private Path _path;
     private int _currentWaypoint = 0;
@@ -21,11 +22,13 @@ public class SeekerAI : MonoBehaviour
         _seeker = GetComponent<Seeker>();
         _rb = GetComponent<Rigidbody2D>();
 
-        InvokeRepeating(nameof(UpdatePath), 0f, .5f);
+        InvokeRepeating(nameof(UpdatePath), 0f, .05f);
     }
 
     private void UpdatePath()
     {
+        if (!isSeeking) return;
+
         if (_seeker.IsDone())
             _seeker.StartPath(_rb.position, target.position, OnPathComplete);
     }

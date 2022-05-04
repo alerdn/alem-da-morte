@@ -6,6 +6,8 @@ public class Ammo : Collectible
 {
     public override void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.transform.tag != "Player") return;
+
         int ammoAmount = Random.Range(10, 60);
         Weapon w = GameManager.Instance.player.weapon;
 

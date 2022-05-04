@@ -8,11 +8,15 @@ public class UIManager : Singleton<UIManager>
     public GameObject rewardSelector;
 
     [Header("HUD")]
+    public TMP_Text playerHP;
     public TMP_Text weaponText;
 
     private void Update()
     {
         var player = GameManager.Instance.player;
+
+        playerHP.text = player.currentHP.ToString();
+
         if (player.weapon)
         {
             var w = player.weapon;

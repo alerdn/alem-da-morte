@@ -6,11 +6,12 @@ public abstract class Health : MonoBehaviour
 {
     [Header("Health setup")]
     public int initialHP;
-    [SerializeField]
-    protected int _currentHP;
+
+    [Header("Debug only")]
+    public int currentHP;
 
     private void Awake() {
-        _currentHP = initialHP;
+        currentHP = initialHP;
     }
 
     public abstract void Damage(int d);

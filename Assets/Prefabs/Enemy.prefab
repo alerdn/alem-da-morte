@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7826961502992771235}
   - component: {fileID: 7826961502992771239}
   - component: {fileID: 3780397547517506572}
+  - component: {fileID: 8975137374207642712}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -143,6 +144,7 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 400
   nextWaypointDistance: 3
+  isSeeking: 0
 --- !u!114 &3780397547517506572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,10 +158,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHP: 0
-  _currentHP: 0
+  currentHP: 0
   damage: 0
   attackSpeed: 1
   moveSpeed: 1
+--- !u!58 &8975137374207642712
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7826961502992771237}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 8
 --- !u!1 &7826961504295159577
 GameObject:
   m_ObjectHideFlags: 0
