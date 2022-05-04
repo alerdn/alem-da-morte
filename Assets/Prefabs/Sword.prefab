@@ -280,6 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Espada Divina
   description: Uma espada ancestral
+  sprite: {fileID: 0}
   damage: 1
   blade: {fileID: 0}
 --- !u!95 &3227446945974672612
@@ -309,6 +310,6 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8749100670323789988}
   m_Enabled: 1
-  m_SortingLayerID: 787416415
-  m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1

@@ -193,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 2600121726076897228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.52, y: 0.52, z: 0.52}
+  m_LocalScale: {x: 0.4789252, y: 0.4789252, z: 0.4789252}
   m_Children:
   - {fileID: 2600121726003182837}
   - {fileID: 2600121727710033170}
@@ -218,8 +218,8 @@ MonoBehaviour:
   aim: {fileID: 8247283443001460087}
   moveSpeed: 10
   rotationSpeed: 10
-  dashSpeed: 40
-  dashLength: 0.2
+  dashSpeed: 30
+  dashLength: 0.1
   _activeSpeed: 0
   _dashCounter: 0
   _rb: {fileID: 0}
@@ -231,9 +231,9 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2600121726076897228}
   m_Enabled: 1
-  m_SortingLayerID: 787416415
-  m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
 --- !u!50 &2600121726076897216
 Rigidbody2D:
   serializedVersion: 4

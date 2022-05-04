@@ -43,9 +43,9 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3045449576740858908}
   m_Enabled: 1
-  m_SortingLayerID: 787416415
-  m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
 --- !u!114 &4061573436327162371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   cartridgeCapacity: 10
   ammoAmount: 0
   shootPerSeconds: 4
-  reloadSpeed: 0.5
+  secondsToReload: 1
 --- !u!61 &9032661809140805222
 BoxCollider2D:
   m_ObjectHideFlags: 0
