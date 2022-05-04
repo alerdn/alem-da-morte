@@ -31,16 +31,13 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-
-        if (collision.gameObject.GetType() == this.GetType() || collision.transform.tag == "FloorLimit")
+        if (collider.transform.tag == "Obstacle" || collider.transform.tag == "Enemy")
         {
-            gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
-            return;
+            Debug.Log("Destruiu bullet");
+            collider.gameObject.GetComponent<Health>()?.Damage(damage);
+            gameObject.SetActive(false);
         }
-
-        collision.gameObject.GetComponent<IDamageable>()?.Damage(damage);
-        gameObject.SetActive(false);
     }
 }

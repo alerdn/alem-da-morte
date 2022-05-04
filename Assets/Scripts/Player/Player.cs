@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Player : MonoBehaviour
+public class Player : Health
 {
     [Header("Weapon setup")]
     public Weapon weapon;
@@ -48,6 +48,18 @@ public class Player : MonoBehaviour
         HandleAim();
     }
 
+    #region Health
+    public override void Damage(int d)
+    {
+        _currentHP -= d;
+    }
+
+    public override void Kill()
+    {
+        Debug.Log("Player is dead");
+    }
+    #endregion
+
     public void EquipWeapon(Weapon w)
     {
         if (weapon != null)
@@ -64,6 +76,7 @@ public class Player : MonoBehaviour
         weapon = w;
     }
 
+    #region Handling movements
     private void GetMovimentDirection()
     {
         if (_dashCounter <= 0)
@@ -103,6 +116,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Handling attacks
     private void HandleAim()
     {
 
@@ -131,4 +147,5 @@ public class Player : MonoBehaviour
             }
         }
     }
+    #endregion
 }

@@ -167,7 +167,7 @@ MonoBehaviour:
   manualDebugFloorRoof: 0
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
+  logPathResults: 0
   maxNearestNodeDistance: 100
   scanOnStartup: 1
   fullGetNearestSearch: 0
@@ -40363,7 +40363,7 @@ GameObject:
   - component: {fileID: 2035971834}
   m_Layer: 6
   m_Name: Obstacles
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47174,6 +47174,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3780397547517506572, guid: 0ca9ba341ec47484c8847792c2831e63, type: 3}
+      propertyPath: damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780397547517506572, guid: 0ca9ba341ec47484c8847792c2831e63, type: 3}
+      propertyPath: initialHP
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7826961502992771234, guid: 0ca9ba341ec47484c8847792c2831e63, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -47220,6 +47228,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7826961502992771237, guid: 0ca9ba341ec47484c8847792c2831e63, type: 3}
       propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7826961502992771237, guid: 0ca9ba341ec47484c8847792c2831e63, type: 3}
+      propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7826961502992771238, guid: 0ca9ba341ec47484c8847792c2831e63, type: 3}
