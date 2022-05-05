@@ -20,6 +20,10 @@ public class Player : Health
     [Header("Attacking movement")]
     public float attackingMovementSpeed = 4f;
 
+    [Header("Buffs")]
+    public List<Buff> buffs;
+    public bool isMoving = false;
+
     private float _activeSpeed;
     private float _dashCounter;
     private Vector2 _moveInput;
@@ -30,6 +34,7 @@ public class Player : Health
     {
         _activeSpeed = moveSpeed;
         _rb = gameObject.GetComponent<Rigidbody2D>();
+        buffs = new List<Buff>();
     }
 
     private void Update()
@@ -40,12 +45,7 @@ public class Player : Health
         HandleAttack();
         HandleRealoadWeapon();
 
-        /* Apenas DEV
-        if (Input.GetKeyDown(KeyCode.Q) && weapon != null)
-        {
-            Destroy(weapon.gameObject);
-            weapon = null;
-        }*/
+        UpdateBuffs();
     }
 
     private void FixedUpdate()
@@ -54,8 +54,22 @@ public class Player : Health
         HandleAim();
     }
 
+    private void UpdateBuffs()
+    {
+        foreach (var b in buffs)
+        {
+            b.UpdateBuff();
+        }
+    }
+
     #region Health
-    public override void Damage(int d)
+    public void Heal(float h)
+    {
+        currentHP += h;
+        if (currentHP > maxHP) currentHP = maxHP;
+    }
+
+    public override void Damage(float d)
     {
         currentHP -= d;
         if (currentHP <= 0) Kill();
@@ -76,7 +90,7 @@ public class Player : Health
             weapon = null;
         }
 
-        Destroy(w.gameObject.GetComponent<BoxCollider2D>());
+        // Destroy(w.gameObject.GetComponent<BoxCollider2D>());
         w.gameObject.transform.rotation = gameObject.transform.rotation;
         w.gameObject.transform.parent = gameObject.transform;
         w.gameObject.transform.localPosition = new Vector2(-0.7f, 0.7f);
@@ -111,7 +125,10 @@ public class Player : Health
 
     private void HandleMovement()
     {
-        _rb.velocity = _moveInput * _activeSpeed;
+        var newVelocity = _moveInput * _activeSpeed;
+        _rb.velocity = newVelocity;
+
+        isMoving = newVelocity != Vector2.zero;
     }
 
     private void HandleRun()
@@ -162,7 +179,7 @@ public class Player : Health
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             _isAttacking = false;
         }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3045449576740859875}
   - component: {fileID: 4061573436327162371}
   m_Layer: 0
-  m_Name: EnergyGun
+  m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,15 +57,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ab1ee93a5ce34439445ce51d054e61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Arma de Energia
-  description: "Uma arma do s\xE9culo XXX"
+  title: Pistola
+  description: "Arma b\xE1sica de um cientista"
   sprite: {fileID: 0}
   damage: 2
   shootPoint: {fileID: 3045449577751106047}
-  maxCapacity: 120
+  maxCapacity: 40
   cartridgeCapacity: 20
-  shootPerSeconds: 4
-  secondsToReload: 1
+  shootPerSeconds: 6
+  secondsToReload: 0.5
   totalCapacity: 0
   ammoAmount: 0
   damageMultiplier: 1
@@ -141,7 +141,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
-  m_Color: {r: 0.08597367, g: 0.40721378, b: 0.7924528, a: 1}
+  m_Color: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : Reward
 {
     [Header("Weapon setup")]
-    public int damage = 1;
+    public float damage = 1f;
     public Transform shootPoint;
     public int maxCapacity = 30;
     public int cartridgeCapacity = 10;
@@ -15,6 +15,7 @@ public class Weapon : Reward
     [Header("Debug only")]
     public int totalCapacity = 0;
     public int ammoAmount = 0;
+    public float damageMultiplier = 1f;
 
     private Coroutine _isAttacking = null;
     private Coroutine _isReloading = null;
@@ -25,6 +26,7 @@ public class Weapon : Reward
         ReloadWeapon();
     }
 
+    /*
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.tag == "Player")
@@ -32,6 +34,7 @@ public class Weapon : Reward
             GameManager.Instance.player.EquipWeapon(this);
         }
     }
+    */
 
     public void Attack()
     {
@@ -46,10 +49,12 @@ public class Weapon : Reward
             var bullet = PlayerBulletManager.Instance.GetBullet();
             if (bullet)
             {
+                float bulletDamage = damage * damageMultiplier;
+
                 bullet.SetActive(true);
                 bullet.transform.position = shootPoint.position;
                 bullet.transform.rotation = shootPoint.rotation;
-                bullet.GetComponent<Bullet>()?.StartBullet(damage);
+                bullet.GetComponent<Bullet>()?.StartBullet(bulletDamage);
 
                 ammoAmount--;
             }
@@ -74,6 +79,7 @@ public class Weapon : Reward
         if (totalCapacity <= 0 || ammoAmount == cartridgeCapacity)
         {
             Debug.Log("No ammo left or cartridge is full");
+            _isReloading = null;
             yield break;
         }
 

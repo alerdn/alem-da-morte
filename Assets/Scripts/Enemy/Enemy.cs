@@ -24,7 +24,7 @@ public class Enemy : Health
         Physics2D.IgnoreCollision(p.GetComponent<Collider2D>(), enemySpace);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.transform.tag != "Player") return;
 
@@ -45,7 +45,7 @@ public class Enemy : Health
         _seeker.isSeeking = true;
     }
 
-    public override void Damage(int d)
+    public override void Damage(float d)
     {
         currentHP -= d;
         if (currentHP <= 0) Kill();

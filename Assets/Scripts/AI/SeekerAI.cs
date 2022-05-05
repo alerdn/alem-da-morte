@@ -9,7 +9,9 @@ public class SeekerAI : MonoBehaviour
     public Transform target;
     public float speed = 1000f;
     public float nextWaypointDistance = 3f;
-    public bool isSeeking = false;
+
+    // Utilizar posteriormente quando descobrir como criar uma detect zone
+    public bool isSeeking = true;
 
     private Path _path;
     private int _currentWaypoint = 0;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public int damage = 1;
+    public float damage = 1f;
     public float speed = 1f;
     public float timeToReset = 5f;
 
@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
         rb.AddForce(transform.up * speed, ForceMode2D.Impulse);
     }
 
-    public void StartBullet(int damage)
+    public void StartBullet(float damage)
     {
         this.damage = damage;
         gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
