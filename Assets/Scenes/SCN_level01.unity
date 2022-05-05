@@ -33258,7 +33258,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0.00000026226044, y: -0.00000026226044, z: -6.878054e-14, w: 1}
-  m_LocalPosition: {x: -12.619995, y: 15.779995, z: -10}
+  m_LocalPosition: {x: -12.509995, y: 18.249994, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -33422,6 +33422,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &1001744763 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8247283443001460087, guid: 3bd961c707b357740b1b27a5aacb5606, type: 3}
+  m_PrefabInstance: {fileID: 2600121727238701195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1042726076
 GameObject:
   m_ObjectHideFlags: 0
@@ -39739,8 +39744,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "[m. atual]/[m. m\xE1xima]\n[Nome da arma]"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fd9470ae2945fbe429a2435e2f568ab3, type: 2}
+  m_sharedMaterial: {fileID: 7005904933530847894, guid: fd9470ae2945fbe429a2435e2f568ab3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -40218,8 +40223,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '[HP do jogador]'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fd9470ae2945fbe429a2435e2f568ab3, type: 2}
+  m_sharedMaterial: {fileID: 7005904933530847894, guid: fd9470ae2945fbe429a2435e2f568ab3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -40243,7 +40248,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 68.55
+  m_fontSize: 61.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -47026,7 +47031,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2111470035}
   m_LocalRotation: {x: -0.00000026226044, y: -0.00000026226044, z: -6.878054e-14, w: 1}
-  m_LocalPosition: {x: -12.619995, y: 15.779995, z: -10}
+  m_LocalPosition: {x: -12.509995, y: 18.249994, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1232371391}
@@ -47186,11 +47191,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2600121726076897218, guid: 3bd961c707b357740b1b27a5aacb5606, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.62
+      value: -12.51
       objectReference: {fileID: 0}
     - target: {fileID: 2600121726076897218, guid: 3bd961c707b357740b1b27a5aacb5606, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.78
+      value: 18.25
       objectReference: {fileID: 0}
     - target: {fileID: 2600121726076897218, guid: 3bd961c707b357740b1b27a5aacb5606, type: 3}
       propertyPath: m_LocalPosition.z
@@ -47225,12 +47230,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2600121726076897219, guid: 3bd961c707b357740b1b27a5aacb5606, type: 3}
+      propertyPath: aim
+      value: 
+      objectReference: {fileID: 1001744763}
+    - target: {fileID: 2600121726076897219, guid: 3bd961c707b357740b1b27a5aacb5606, type: 3}
       propertyPath: initialHP
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2600121726076897219, guid: 3bd961c707b357740b1b27a5aacb5606, type: 3}
       propertyPath: moveSpeed
-      value: 5
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600121726076897219, guid: 3bd961c707b357740b1b27a5aacb5606, type: 3}
+      propertyPath: attackingMovementSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2600121726076897228, guid: 3bd961c707b357740b1b27a5aacb5606, type: 3}
       propertyPath: m_Name
@@ -47260,14 +47273,6 @@ PrefabInstance:
     - target: {fileID: 3780397547517506572, guid: 0ca9ba341ec47484c8847792c2831e63, type: 3}
       propertyPath: attackSpeed
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7826961502992771164, guid: 0ca9ba341ec47484c8847792c2831e63, type: 3}
-      propertyPath: m_Radius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7826961502992771164, guid: 0ca9ba341ec47484c8847792c2831e63, type: 3}
-      propertyPath: m_Offset.x
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7826961502992771234, guid: 0ca9ba341ec47484c8847792c2831e63, type: 3}
       propertyPath: m_RootOrder

@@ -10,17 +10,21 @@ public class Player : Health
     public Transform aim;
 
     [Header("Movement setup")]
-    public float moveSpeed = 10f;
+    public float moveSpeed = 8f;
     public float rotationSpeed = 10f;
 
     [Header("Dash setup")]
-    public float dashSpeed = 40f;
-    public float dashLength = 0.5f;
+    public float dashSpeed = 30f;
+    public float dashLength = 0.1f;
+
+    [Header("Attacking movement")]
+    public float attackingMovementSpeed = 4f;
 
     private float _activeSpeed;
     private float _dashCounter;
     private Vector2 _moveInput;
     private Rigidbody2D _rb;
+    private bool _isAttacking = false;
 
     private void Start()
     {
@@ -30,8 +34,9 @@ public class Player : Health
 
     private void Update()
     {
-        GetMovimentDirection();
-        HandleRun();
+        GetMovementDirection();
+        HandleAttackingMovement();
+        // BUGADO -> HandleRun();
         HandleAttack();
         HandleRealoadWeapon();
 
@@ -45,7 +50,7 @@ public class Player : Health
 
     private void FixedUpdate()
     {
-        HandleMoviment();
+        HandleMovement();
         HandleAim();
     }
 
@@ -81,7 +86,19 @@ public class Player : Health
     #endregion
 
     #region Handling movements
-    private void GetMovimentDirection()
+    private void HandleAttackingMovement()
+    {
+        if (_isAttacking)
+        {
+            _activeSpeed = attackingMovementSpeed;
+        }
+        else
+        {
+            _activeSpeed = moveSpeed;
+        }
+    }
+
+    private void GetMovementDirection()
     {
         if (_dashCounter <= 0)
         {
@@ -92,7 +109,7 @@ public class Player : Health
         _moveInput.Normalize();
     }
 
-    private void HandleMoviment()
+    private void HandleMovement()
     {
         _rb.velocity = _moveInput * _activeSpeed;
     }
@@ -118,6 +135,7 @@ public class Player : Health
                 _activeSpeed = moveSpeed;
             }
         }
+
     }
 
     #endregion
@@ -137,7 +155,16 @@ public class Player : Health
     {
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            weapon?.Attack();
+            if (weapon)
+            {
+                _isAttacking = true;
+                weapon.Attack();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            _isAttacking = false;
         }
     }
 
