@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using DG.Tweening;
 
 public class Player : Health
 {
+    [Header("Health animation setup")]
+    public PostProcessVolume volume;
+
     [Header("Animation setup")]
     public Transform topSprite;
     public Transform bottomSprite;
@@ -36,9 +40,14 @@ public class Player : Health
     private Vector2 _moveInput;
     private Rigidbody2D _rb;
     private bool _isAttacking = false;
+    private Vignette _vignette;
 
     private void Start()
     {
+        if (volume.profile.TryGetSettings<Vignette>(out var vig)) {
+            _vignette = vig;
+        }
+
         _currentWeapon = simpleWeapon;
         _activeSpeed = moveSpeed;
         _rb = gameObject.GetComponent<Rigidbody2D>();
@@ -57,6 +66,7 @@ public class Player : Health
         SwitchWeapon();
 
         anim.SetBool("IsMoving", isMoving);
+        _vignette.intensity.value = (maxHP - currentHP) * .1f;
     }
 
     private void FixedUpdate()
@@ -192,8 +202,6 @@ public class Player : Health
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
         topSprite.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-        Debug.Log(angle);
 
         if (angle >= 0 || angle < -180)
         {
