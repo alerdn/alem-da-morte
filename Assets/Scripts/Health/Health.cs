@@ -5,10 +5,15 @@ using UnityEngine;
 public abstract class Health : MonoBehaviour
 {
     [Header("Health setup")]
-    public int initialHP;
+    public float maxHP;
 
-    protected int _currentHP;
+    [Header("Debug only")]
+    public float currentHP;
 
-    public abstract void Damage(int d);
+    private void Awake() {
+        currentHP = maxHP;
+    }
+
+    public abstract void Damage(float d);
     public abstract void Kill();
 }

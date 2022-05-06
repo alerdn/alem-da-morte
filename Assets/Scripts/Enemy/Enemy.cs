@@ -5,25 +5,87 @@ using UnityEngine;
 public class Enemy : Health
 {
     [Header("Enemy setup")]
-    public int damage;
+    public float damage = 1f;
     public float attackSpeed = 1f;
     public float moveSpeed = 1f;
+    public Collider2D enemySpace;
+    public Animator anim;
+    public SpriteRenderer render;
+
+    [Header("Enemy sight")]
+    public float sightRange;
+    public LayerMask playerLayer;
 
     private SeekerAI _seeker;
+    private Coroutine _isAttacking = null;
 
-    private void Start() {
+    private void Start()
+    {
+        var p = GameManager.Instance.player;
+
         _seeker = GetComponent<SeekerAI>();
-        _seeker.target = GameManager.Instance.player.transform;
+        _seeker.target = p.transform;
         _seeker.speed *= moveSpeed;
+
+        Physics2D.IgnoreCollision(p.GetComponent<Collider2D>(), enemySpace);
     }
 
-    public override void Damage(int d)
+    private void Update()
     {
-        _currentHP -= d;
+        Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, sightRange, playerLayer);
+        if (playerCollider) FollowPlayer();
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.transform.tag != "Player") return;
+
+        if (_isAttacking == null)
+            _isAttacking = StartCoroutine(Attack(GameManager.Instance.player));
+    }
+
+    IEnumerator Attack(Player p)
+    {
+        p.Damage(damage);
+
+        yield return new WaitForSeconds(1 / attackSpeed);
+        _isAttacking = null;
+    }
+
+    public void FollowPlayer()
+    {
+        _seeker.isSeeking = true;
+        anim.SetTrigger("SawPlayer");
+    }
+
+    public override void Damage(float d)
+    {
+        HitColor();
+        FollowPlayer();
+
+        currentHP -= d;
+        if (currentHP <= 0) Kill();
     }
 
     public override void Kill()
     {
         Destroy(gameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, sightRange);
+    }
+
+    private void HitColor()
+    {
+        StartCoroutine(ChangeColor());
+    }
+
+    IEnumerator ChangeColor()
+    {
+        render.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        render.color = Color.white;
     }
 }

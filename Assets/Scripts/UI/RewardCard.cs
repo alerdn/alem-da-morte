@@ -24,13 +24,20 @@ public class RewardCard : MonoBehaviour
 
     public void SelectReward()
     {
-        _rewardSetup.isTaken = true;
+        Player p = GameManager.Instance.player;
         Reward r = _rewardSetup.reward;
+        _rewardSetup.isTaken = true;
 
         if (r is Weapon)
         {
             var w = Instantiate(r);
-            GameManager.Instance.player.EquipWeapon((Weapon)w);
+            p.EquipWeapon((Weapon)w);
+        }
+        /* r é buff */
+        else
+        {
+            Buff b = Instantiate(r, p.transform) as Buff;            
+            b.ApplyBuff();
         }
 
         UIManager.Instance.HideRewardSelector();

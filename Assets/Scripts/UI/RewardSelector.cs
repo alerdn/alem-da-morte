@@ -9,6 +9,11 @@ public class RewardSelector : MonoBehaviour
 
     private void Start()
     {
+        StartSelector();
+    }
+
+    private void StartSelector()
+    {
         for (int i = 0; i < amount; i++)
         {
             RewardSetup rewardSetup = GameManager.Instance.GetRandomReward();
