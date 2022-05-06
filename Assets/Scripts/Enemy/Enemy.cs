@@ -12,6 +12,9 @@ public class Enemy : Health
     public Animator anim;
     public SpriteRenderer render;
 
+    [Range(0, 1)]
+    public float dropRatio = 0.3f;
+
     [Header("Enemy sight")]
     public float sightRange;
     public LayerMask playerLayer;
@@ -69,6 +72,13 @@ public class Enemy : Health
 
     public override void Kill()
     {
+        // Drop collectible
+        if (Random.Range(0f, 1f) <= dropRatio)
+        {
+            var col = Instantiate(GameManager.Instance.GetRandomDrop());
+            col.transform.position = transform.position;
+        }
+
         Destroy(gameObject);
     }
 

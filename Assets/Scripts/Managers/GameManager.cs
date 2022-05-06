@@ -6,11 +6,7 @@ public class GameManager : Singleton<GameManager>
 {
     public Player player;
     public List<RewardSetup> rewardSetup;
-
-    public void GetReward()
-    {
-        Debug.Log(GetRandomReward()?.reward.title);
-    }
+    public List<Collectible> collectibles;
 
     public RewardSetup GetRandomReward()
     {
@@ -32,6 +28,11 @@ public class GameManager : Singleton<GameManager>
         }
 
         return null;
+    }
+
+    public Collectible GetRandomDrop()
+    {
+        return collectibles[Random.Range(0, collectibles.Count)];
     }
 }
 
