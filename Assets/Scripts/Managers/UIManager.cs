@@ -28,15 +28,10 @@ public class UIManager : Singleton<UIManager>
         buffList.text = listText;
 
         /* Detalhes sobre a arma */
-        if (player.weapon)
-        {
-            var w = player.weapon;
+        
+            var w = player._currentWeapon;
             weaponText.text = $"{w.ammoAmount}/{w.totalCapacity}\n{w.title}\nDano: {(int)(w.damage * w.damageMultiplier)}";
-        }
-        else
-        {
-            weaponText.text = "";
-        }
+        
     }
 
     public void HideRewardSelector()

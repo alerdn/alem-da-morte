@@ -5,10 +5,16 @@ using UnityEngine;
 public class Enemy : Health
 {
     [Header("Enemy setup")]
-    public int damage = 1;
+    public float damage = 1f;
     public float attackSpeed = 1f;
     public float moveSpeed = 1f;
     public Collider2D enemySpace;
+    public Animator anim;
+    public SpriteRenderer render;
+
+    [Header("Enemy sight")]
+    public float sightRange;
+    public LayerMask playerLayer;
 
     private SeekerAI _seeker;
     private Coroutine _isAttacking = null;
@@ -22,6 +28,12 @@ public class Enemy : Health
         _seeker.speed *= moveSpeed;
 
         Physics2D.IgnoreCollision(p.GetComponent<Collider2D>(), enemySpace);
+    }
+
+    private void Update()
+    {
+        Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, sightRange, playerLayer);
+        if (playerCollider) FollowPlayer();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -43,10 +55,14 @@ public class Enemy : Health
     public void FollowPlayer()
     {
         _seeker.isSeeking = true;
+        anim.SetTrigger("SawPlayer");
     }
 
     public override void Damage(float d)
     {
+        HitColor();
+        FollowPlayer();
+
         currentHP -= d;
         if (currentHP <= 0) Kill();
     }
@@ -54,5 +70,22 @@ public class Enemy : Health
     public override void Kill()
     {
         Destroy(gameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, sightRange);
+    }
+
+    private void HitColor()
+    {
+        StartCoroutine(ChangeColor());
+    }
+
+    IEnumerator ChangeColor()
+    {
+        render.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        render.color = Color.white;
     }
 }

@@ -18,7 +18,7 @@ public class StandingShotBuff : Buff
 
     public override void UpdateBuff()
     {
-        _player.weapon.damageMultiplier = damageMultiplier;
+        _player._currentWeapon.damageMultiplier = damageMultiplier;
 
         if (!_player.isMoving && _coroutine == null)
             _coroutine = StartCoroutine(IncreaseDamage());

@@ -6,12 +6,13 @@ using Pathfinding;
 public class SeekerAI : MonoBehaviour
 {
     [Header("IA setup")]
+    public Transform seekerGFX;
     public Transform target;
     public float speed = 1000f;
     public float nextWaypointDistance = 3f;
 
     // Utilizar posteriormente quando descobrir como criar uma detect zone
-    public bool isSeeking = true;
+    public bool isSeeking = false;
 
     private Path _path;
     private int _currentWaypoint = 0;
@@ -67,6 +68,15 @@ public class SeekerAI : MonoBehaviour
         if (distance < nextWaypointDistance)
         {
             _currentWaypoint++;
+        }
+
+        if (_rb.velocity.x >= 0.0f)
+        {
+            seekerGFX.localScale = new Vector3(1f, 1f, 1f);
+        }
+        else if (_rb.velocity.x <= -0.0f)
+        {
+            seekerGFX.localScale = new Vector3(-1f, 1f, 1f);
         }
     }
 }

@@ -35,7 +35,6 @@ public class Bullet : MonoBehaviour
     {
         if (collider.transform.tag == "Obstacle" || collider.transform.tag == "Enemy")
         {
-            Debug.Log("Destruiu bullet");
             collider.gameObject.GetComponent<Health>()?.Damage(damage);
             gameObject.SetActive(false);
         }

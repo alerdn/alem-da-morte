@@ -5,7 +5,14 @@ using DG.Tweening;
 
 public class Player : Health
 {
+    [Header("Animation setup")]
+    public Transform topSprite;
+    public Transform bottomSprite;
+    public Animator anim;
+
     [Header("Weapon setup")]
+    public Weapon _currentWeapon;
+    public Weapon simpleWeapon;
     public Weapon weapon;
     public Transform aim;
 
@@ -32,6 +39,7 @@ public class Player : Health
 
     private void Start()
     {
+        _currentWeapon = simpleWeapon;
         _activeSpeed = moveSpeed;
         _rb = gameObject.GetComponent<Rigidbody2D>();
         buffs = new List<Buff>();
@@ -46,6 +54,9 @@ public class Player : Health
         HandleRealoadWeapon();
 
         UpdateBuffs();
+        SwitchWeapon();
+
+        anim.SetBool("IsMoving", isMoving);
     }
 
     private void FixedUpdate()
@@ -82,6 +93,21 @@ public class Player : Health
     #endregion
 
     #region Other commands
+    public void SwitchWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _currentWeapon = simpleWeapon;
+
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (weapon)
+                _currentWeapon = weapon;
+        }
+    }
+
     public void EquipWeapon(Weapon w)
     {
         if (weapon != null)
@@ -91,9 +117,9 @@ public class Player : Health
         }
 
         // Destroy(w.gameObject.GetComponent<BoxCollider2D>());
-        w.gameObject.transform.rotation = gameObject.transform.rotation;
-        w.gameObject.transform.parent = gameObject.transform;
-        w.gameObject.transform.localPosition = new Vector2(-0.7f, 0.7f);
+        w.gameObject.transform.rotation = topSprite.rotation;
+        w.gameObject.transform.parent = topSprite;
+        w.gameObject.transform.localPosition = new Vector2(-0.45f, 1.25f);
 
         weapon = w;
     }
@@ -160,23 +186,33 @@ public class Player : Health
     #region Handling attacks
     private void HandleAim()
     {
-
-        Vector2 direction = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - _rb.position;
-        aim.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = mousePosition - _rb.position;
+        aim.position = mousePosition;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-        _rb.rotation = angle;
+        topSprite.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        Debug.Log(angle);
+
+        if (angle >= 0 || angle < -180)
+        {
+            topSprite.localScale = new Vector3(-1f, 1f, 1f);
+            bottomSprite.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else
+        {
+            topSprite.localScale = new Vector3(1f, 1f, 1f);
+            bottomSprite.localScale = new Vector3(1f, 1f, 1f);
+        }
     }
 
     private void HandleAttack()
     {
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            if (weapon)
-            {
-                _isAttacking = true;
-                weapon.Attack();
-            }
+            _isAttacking = true;
+            _currentWeapon.Attack();
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -189,7 +225,7 @@ public class Player : Health
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            weapon.ReloadWeapon();
+            _currentWeapon.ReloadWeapon();
         }
     }
     #endregion

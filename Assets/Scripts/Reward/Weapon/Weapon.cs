@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapon : Reward
 {
     [Header("Weapon setup")]
+    public bool simpleWeapon = false;
     public float damage = 1f;
     public Transform shootPoint;
     public int maxCapacity = 30;
@@ -25,16 +26,6 @@ public class Weapon : Reward
         totalCapacity = maxCapacity;
         ReloadWeapon();
     }
-
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.transform.tag == "Player")
-        {
-            GameManager.Instance.player.EquipWeapon(this);
-        }
-    }
-    */
 
     public void Attack()
     {
@@ -59,7 +50,7 @@ public class Weapon : Reward
                 ammoAmount--;
             }
         }
-        else Debug.Log("Need to reload the gun!");
+        else ReloadWeapon();
 
         yield return new WaitForSeconds(1 / shootPerSeconds);
         _isAttacking = null;
@@ -78,7 +69,6 @@ public class Weapon : Reward
         int ammoToReload = 0;
         if (totalCapacity <= 0 || ammoAmount == cartridgeCapacity)
         {
-            Debug.Log("No ammo left or cartridge is full");
             _isReloading = null;
             yield break;
         }
@@ -101,12 +91,11 @@ public class Weapon : Reward
         }
 
         /* Remove a quantidade recarregada do total */
-        totalCapacity -= ammoToReload;
+        if (!simpleWeapon)totalCapacity -= ammoToReload;
 
         /* Recarrega a arma */
         ammoAmount += ammoToReload;
 
-        Debug.Log("Weapon realoded!");
         _isReloading = null;
     }
 

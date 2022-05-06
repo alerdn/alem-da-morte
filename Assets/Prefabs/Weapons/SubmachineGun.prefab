@@ -60,6 +60,7 @@ MonoBehaviour:
   title: Metralhadora
   description: Dispara rapidamente, mas causa pouco dano
   sprite: {fileID: 0}
+  simpleWeapon: 0
   damage: 1
   shootPoint: {fileID: 3045449577751106047}
   maxCapacity: 160
@@ -85,7 +86,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3045449577292200694
 Transform:
   m_ObjectHideFlags: 0
