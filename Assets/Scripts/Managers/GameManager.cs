@@ -7,6 +7,64 @@ public class GameManager : Singleton<GameManager>
     public Player player;
     public List<RewardSetup> rewardSetup;
     public List<Collectible> collectibles;
+    public List<Enemy> enemies;
+
+    public static bool isPaused = false;
+
+    public enum STATE
+    {
+        Play,
+        RewardSelector,
+        Menu
+    }
+
+    public static STATE state = STATE.RewardSelector;
+
+    private GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
+
+    private void Update()
+    {
+        if (enemies.Count == 0)
+        {
+            Debug.Log("All enemies were defeated");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (state == STATE.Play || state == STATE.Menu)
+            {
+                isPaused = !isPaused;
+                if (state == STATE.Play) state = STATE.Menu;
+                else state = STATE.Play;
+
+                PauseGame();
+            }
+        }
+    }
+
+
+    public void PauseGame(STATE s)
+    {
+        state = s;
+        PauseGame();
+    }
+
+    public void PauseGame()
+    {
+        if (isPaused)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
 
     public RewardSetup GetRandomReward()
     {

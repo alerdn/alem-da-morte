@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class Player : Health
 {
@@ -56,23 +57,37 @@ public class Player : Health
 
     private void Update()
     {
-        GetMovementDirection();
-        HandleAttackingMovement();
-        // BUGADO -> HandleRun();
-        HandleAttack();
-        HandleRealoadWeapon();
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SceneManager.LoadScene(0);
+        }
 
-        UpdateBuffs();
-        SwitchWeapon();
+        if (!GameManager.isPaused)
+        {
+            GetMovementDirection();
+            HandleAttackingMovement();
+            // BUGADO -> HandleRun();
+            HandleAttack();
+            HandleRealoadWeapon();
 
-        anim.SetBool("IsMoving", isMoving);
-        _vignette.intensity.value = (maxHP - currentHP) * .1f;
+            UpdateBuffs();
+            SwitchWeapon();
+
+            anim.SetBool("IsMoving", isMoving);
+            AnimateVignette();
+        
+        }
     }
 
     private void FixedUpdate()
     {
         HandleMovement();
         HandleAim();
+    }
+
+    private void AnimateVignette()
+    {
+        DOTween.To(() => _vignette.intensity.value, x => _vignette.intensity.value = x, ((maxHP - currentHP) * .1f), 1f);
     }
 
     private void UpdateBuffs()

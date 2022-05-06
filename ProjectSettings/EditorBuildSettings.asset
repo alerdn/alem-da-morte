@@ -10,5 +10,5 @@ EditorBuildSettings:
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/SCN_level01.unity
-    guid: acd862457ae5bb14db28eebaba730990
+    guid: fd2921f1f40974844bebbd6f47e89e3a
   m_configObjects: {}

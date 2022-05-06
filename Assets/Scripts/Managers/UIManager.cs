@@ -12,10 +12,15 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text weaponText;
     public TMP_Text buffList;
 
+    private Player player;
+
+    void Start()
+    {
+        player = GameManager.Instance.player;
+    }
+
     private void Update()
     {
-        var player = GameManager.Instance.player;
-
         /* HP do persoangem */
         playerHP.text = $"{(int)(player.currentHP * 10f)}%";
 
@@ -28,15 +33,14 @@ public class UIManager : Singleton<UIManager>
         buffList.text = listText;
 
         /* Detalhes sobre a arma */
-        
-            var w = player._currentWeapon;
-            weaponText.text = $"{w.ammoAmount}/{w.totalCapacity}\n{w.title}\nDano: {(int)(w.damage * w.damageMultiplier)}";
-        
+        var w = player._currentWeapon;
+        weaponText.text = $"{w.ammoAmount}/{w.totalCapacity}\n{w.title}\nDano: {(int)(w.damage * w.damageMultiplier)}";
+
     }
 
     public void HideRewardSelector()
     {
-        rewardSelector.SetActive(false);
+        rewardSelector.GetComponent<RewardSelector>().Hide();
         foreach (var r in GameManager.Instance.rewardSetup)
         {
             r.isShowing = false;

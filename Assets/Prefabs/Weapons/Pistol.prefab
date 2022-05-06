@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3045449576740858909}
   - component: {fileID: 3045449576740859875}
-  - component: {fileID: 4061573436327162371}
+  - component: {fileID: 8252236572768057209}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -45,7 +45,7 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
---- !u!114 &4061573436327162371
+--- !u!114 &8252236572768057209
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,19 +54,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3045449576740858908}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0ab1ee93a5ce34439445ce51d054e61, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e1d467e414bd7d409d5bd6cbb28e8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Pistola
-  description: "Arma b\xE1sica de um cientista"
+  title: "P\xEDstol"
+  description: 
   sprite: {fileID: 0}
-  simpleWeapon: 0
-  damage: 2
+  simpleWeapon: 1
+  damage: 1
   shootPoint: {fileID: 3045449577751106047}
-  maxCapacity: 40
-  cartridgeCapacity: 20
-  shootPerSeconds: 6
-  secondsToReload: 0.5
+  maxCapacity: 30
+  cartridgeCapacity: 10
+  shootPerSeconds: 8
+  secondsToReload: 1
   totalCapacity: 0
   ammoAmount: 0
   damageMultiplier: 1

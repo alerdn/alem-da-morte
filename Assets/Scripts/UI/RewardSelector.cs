@@ -12,6 +12,20 @@ public class RewardSelector : MonoBehaviour
         StartSelector();
     }
 
+    public void Show()
+    {
+        gameObject.SetActive(true);
+        GameManager.isPaused = true;
+        GameManager.Instance.PauseGame(GameManager.STATE.RewardSelector);
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+        GameManager.isPaused = false;
+        GameManager.Instance.PauseGame(GameManager.STATE.Play);
+    }
+
     private void StartSelector()
     {
         for (int i = 0; i < amount; i++)

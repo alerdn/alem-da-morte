@@ -20,7 +20,11 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     public virtual void Awake()
     {
         if (_instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
             _instance = GetComponent<T>();
+
+        }
         else Destroy(gameObject);
     }
 }
