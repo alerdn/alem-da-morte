@@ -41,5 +41,6 @@ public class RewardCard : MonoBehaviour
         }
 
         UIManager.Instance.HideRewardSelector();
+        LevelManager.Instance.NextLevel();
     }
 }

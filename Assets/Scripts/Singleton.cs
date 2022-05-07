@@ -23,7 +23,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             _instance = GetComponent<T>();
-
         }
         else Destroy(gameObject);
     }

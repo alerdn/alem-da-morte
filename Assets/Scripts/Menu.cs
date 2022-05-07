@@ -5,13 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    private GameManager gameManager;
-
-    private void Start()
+    public void Continuar()
     {
-        gameManager = GameManager.Instance;
+        GameManager.isPaused = false;
+        UIManager.Instance.ShowPauseMenu(0);
+        GameManager.Instance.PauseGame(GameManager.STATE.Play);
+    }
 
-        Debug.Log(gameManager.player.currentHP);
+    public void BackToMenu()
+    {
+        GameManager.isPaused = false;
+        UIManager.Instance.ShowPauseMenu(0);
+        GameManager.Instance.PauseGame(GameManager.STATE.Play);
+        SceneManager.LoadScene(0);
     }
 
     public void Play(int sceneId)

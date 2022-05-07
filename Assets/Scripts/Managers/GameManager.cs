@@ -7,18 +7,21 @@ public class GameManager : Singleton<GameManager>
     public Player player;
     public List<RewardSetup> rewardSetup;
     public List<Collectible> collectibles;
-    public List<Enemy> enemies;
-
     public static bool isPaused = false;
 
     public enum STATE
     {
-        Play,
-        RewardSelector,
-        Menu
+        Play = 0,
+        RewardSelector = 2,
+        Menu = 1
     }
 
-    public static STATE state = STATE.RewardSelector;
+    public enum LEVEL
+    {
+        um, dois, tres, boss
+    }
+
+    public static STATE state = STATE.Play;
 
     private GameManager gameManager;
 
@@ -29,11 +32,11 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        if (enemies.Count == 0)
-        {
-            Debug.Log("All enemies were defeated");
-        }
+        HandlePauseMenu();
+    }
 
+    private void HandlePauseMenu()
+    {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (state == STATE.Play || state == STATE.Menu)
@@ -42,11 +45,12 @@ public class GameManager : Singleton<GameManager>
                 if (state == STATE.Play) state = STATE.Menu;
                 else state = STATE.Play;
 
+                UIManager.Instance.ShowPauseMenu((int)state);
+
                 PauseGame();
             }
         }
     }
-
 
     public void PauseGame(STATE s)
     {

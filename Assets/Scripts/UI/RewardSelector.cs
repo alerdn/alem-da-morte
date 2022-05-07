@@ -7,26 +7,9 @@ public class RewardSelector : MonoBehaviour
     public GameObject cardPrefab;
     public int amount = 2;
 
-    private void Start()
-    {
-        StartSelector();
-    }
+    private List<GameObject> cards = new List<GameObject>();
 
-    public void Show()
-    {
-        gameObject.SetActive(true);
-        GameManager.isPaused = true;
-        GameManager.Instance.PauseGame(GameManager.STATE.RewardSelector);
-    }
-
-    public void Hide()
-    {
-        gameObject.SetActive(false);
-        GameManager.isPaused = false;
-        GameManager.Instance.PauseGame(GameManager.STATE.Play);
-    }
-
-    private void StartSelector()
+    public void StartSelector()
     {
         for (int i = 0; i < amount; i++)
         {
@@ -35,8 +18,20 @@ public class RewardSelector : MonoBehaviour
             {
                 var card = Instantiate(cardPrefab, gameObject.transform);
                 card.GetComponent<RewardCard>().Init(rewardSetup);
+                cards.Add(card);
+
                 rewardSetup.isShowing = true;
             }
         }
+    }
+
+    public void ClearSelector()
+    {
+        foreach (var c in cards)
+        {
+            Destroy(c);
+        }
+
+        cards.Clear();
     }
 }

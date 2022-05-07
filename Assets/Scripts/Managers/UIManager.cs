@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class UIManager : Singleton<UIManager>
+public class UIManager : MonoBehaviour
 {
+    [Header("UI")]
     public GameObject rewardSelector;
+    public GameObject pauseMenu;
 
     [Header("HUD")]
     public TMP_Text playerHP;
@@ -13,6 +15,29 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text buffList;
 
     private Player player;
+
+    #region Singleton
+    private static UIManager _instance;
+    public static UIManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+                Debug.LogError("UIManager instance is null");
+
+            return _instance;
+        }
+    }
+
+    public virtual void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = GetComponent<UIManager>();
+        }
+        else Destroy(gameObject);
+    }
+    #endregion
 
     void Start()
     {
@@ -40,10 +65,26 @@ public class UIManager : Singleton<UIManager>
 
     public void HideRewardSelector()
     {
-        rewardSelector.GetComponent<RewardSelector>().Hide();
+        rewardSelector.SetActive(false);
+        rewardSelector.GetComponentInChildren<RewardSelector>().ClearSelector();
+
         foreach (var r in GameManager.Instance.rewardSetup)
         {
             r.isShowing = false;
         }
+    }
+
+    public void ShowRewardSelector()
+    {
+        rewardSelector.SetActive(true);
+        rewardSelector.GetComponentInChildren<RewardSelector>().StartSelector();
+
+        GameManager.isPaused = true;
+        GameManager.Instance.PauseGame(GameManager.STATE.RewardSelector);
+    }
+
+    public void ShowPauseMenu(int s)
+    {
+        pauseMenu.SetActive(s == 1);
     }
 }

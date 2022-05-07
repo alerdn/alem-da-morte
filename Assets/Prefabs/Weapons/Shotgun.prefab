@@ -66,7 +66,7 @@ MonoBehaviour:
   maxCapacity: 60
   cartridgeCapacity: 12
   shootPerSeconds: 2
-  secondsToReload: 1
+  secondsToReload: 2
   totalCapacity: 0
   ammoAmount: 0
   damageMultiplier: 1

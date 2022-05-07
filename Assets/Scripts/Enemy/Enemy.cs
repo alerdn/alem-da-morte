@@ -79,7 +79,7 @@ public class Enemy : Health
             col.transform.position = transform.position;
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void OnDrawGizmosSelected()

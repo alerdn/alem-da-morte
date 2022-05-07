@@ -5,6 +5,7 @@ using UnityEngine;
 public class StandingShotBuff : Buff
 {
     public float damageMultiplier = 1f;
+    public float timeToStart = .25f;
 
     private Player _player;
     private Coroutine _coroutine = null;
@@ -35,7 +36,7 @@ public class StandingShotBuff : Buff
 
     IEnumerator IncreaseDamage()
     {
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(timeToStart);
 
         damageMultiplier = _initialDamageMultiplier;
 
