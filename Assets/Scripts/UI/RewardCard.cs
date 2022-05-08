@@ -19,7 +19,18 @@ public class RewardCard : MonoBehaviour
 
         _title.text = r.title;
         _image.sprite = r.sprite;
-        _stats.text = r.description;
+
+        if (r is Buff)
+            _stats.text = r.description;
+        else
+        {
+            Weapon w = (Weapon)r;
+            int dps = (int)(w.damage * w.shootPerSeconds);
+            _stats.text = $"<b>Dano/Segundo</b>: {dps}\n" +
+                $"<b>Munição máxima</b>: {w.maxCapacity}\n" +
+                $"<b>Cartucho</b>: {w.cartridgeCapacity}\n" +
+                $"<b>Tempo de recarga</b>: {w.secondsToReload}";
+        }
     }
 
     public void SelectReward()
@@ -36,7 +47,7 @@ public class RewardCard : MonoBehaviour
         /* r é buff */
         else
         {
-            Buff b = Instantiate(r, p.transform) as Buff;            
+            Buff b = Instantiate(r, p.transform) as Buff;
             b.ApplyBuff();
         }
 

@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    public void Restart()
+    {
+        GameManager.isPaused = false;
+        UIManager.Instance.ShowDeathMenu(false);
+        GameManager.Instance.PauseGame(GameManager.STATE.Play);
+        LevelManager.Instance.RestartLevel();
+    }
+
     public void Continuar()
     {
         GameManager.isPaused = false;

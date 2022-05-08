@@ -22,21 +22,25 @@ public class Player : Health
     public Transform aim;
 
     [Header("Movement setup")]
-    public float moveSpeed = 8f;
+    public float moveSpeed = 6f;
+    public float attackingMovementSpeed = 2.5f;
+    public float runningMovementSpeed = 12f;
     public float rotationSpeed = 10f;
 
     [Header("Dash setup")]
     public float dashSpeed = 30f;
     public float dashLength = 0.1f;
 
-    [Header("Attacking movement")]
-    public float attackingMovementSpeed = 4f;
-
     [Header("Buffs")]
     public List<Buff> buffs;
     public bool isMoving = false;
 
+    [Header("Debug only")]
+    [SerializeField]
     private float _activeSpeed;
+    [SerializeField]
+    private int _stamina = 0;
+
     private float _dashCounter;
     private Vector2 _moveInput;
     private Rigidbody2D _rb;
@@ -45,7 +49,8 @@ public class Player : Health
 
     private void Start()
     {
-        if (volume.profile.TryGetSettings<Vignette>(out var vig)) {
+        if (volume.profile.TryGetSettings<Vignette>(out var vig))
+        {
             _vignette = vig;
         }
 
@@ -57,16 +62,13 @@ public class Player : Health
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (GameManager.state == GameManager.STATE.Play)
         {
-            SceneManager.LoadScene(0);
-        }
+            _activeSpeed = moveSpeed;
 
-        if (!GameManager.isPaused)
-        {
             GetMovementDirection();
+            HandleRun();
             HandleAttackingMovement();
-            // BUGADO -> HandleRun();
             HandleAttack();
             HandleRealoadWeapon();
 
@@ -75,14 +77,16 @@ public class Player : Health
 
             anim.SetBool("IsMoving", isMoving);
             AnimateVignette();
-        
         }
     }
 
     private void FixedUpdate()
     {
-        HandleMovement();
-        HandleAim();
+        if (GameManager.state == GameManager.STATE.Play)
+        {
+            HandleMovement();
+            HandleAim();
+        }
     }
 
     private void AnimateVignette()
@@ -113,7 +117,8 @@ public class Player : Health
 
     public override void Kill()
     {
-        Debug.Log("Player is dead");
+        if (GameManager.state == GameManager.STATE.Play)
+        GameManager.Instance.PlayerDead();
     }
     #endregion
 
@@ -157,10 +162,6 @@ public class Player : Health
         {
             _activeSpeed = attackingMovementSpeed;
         }
-        else
-        {
-            _activeSpeed = moveSpeed;
-        }
     }
 
     private void GetMovementDirection()
@@ -184,24 +185,13 @@ public class Player : Health
 
     private void HandleRun()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (_stamina > 0) _stamina--;
+        if (Input.GetKey(KeyCode.Space))
         {
-            if (_dashCounter <= 0 && _moveInput.normalized != Vector2.zero)
-            {
-                _activeSpeed = dashSpeed;
-                _dashCounter = dashLength;
-            }
+            if (_stamina < 100) _stamina += 2;
 
-        }
-
-        if (_dashCounter > 0)
-        {
-            _dashCounter -= Time.deltaTime;
-
-            if (_dashCounter <= 0)
-            {
-                _activeSpeed = moveSpeed;
-            }
+            if (_stamina < 100)
+                _activeSpeed = runningMovementSpeed;
         }
 
     }

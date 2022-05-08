@@ -45,5 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Runa curativa
   description: Uma runa que te cura constantemente
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: e5316d7999cf8f445a719373aefc015d, type: 3}
   healPerSeconds: 0.05

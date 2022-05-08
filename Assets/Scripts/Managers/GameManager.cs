@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -8,12 +10,15 @@ public class GameManager : Singleton<GameManager>
     public List<RewardSetup> rewardSetup;
     public List<Collectible> collectibles;
     public static bool isPaused = false;
+    public Image fadeOut;
+    public TMP_Text script;
 
     public enum STATE
     {
         Play = 0,
         RewardSelector = 2,
-        Menu = 1
+        Menu = 1,
+        Dead = 3,
     }
 
     public enum LEVEL
@@ -28,11 +33,21 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         gameManager = GameManager.Instance;
+        //UIManager.Instance.ShowRewardSelector();
     }
 
     private void Update()
     {
+        Cursor.visible = state != STATE.Play;
+
         HandlePauseMenu();
+    }
+
+    public void PlayerDead()
+    {
+        isPaused = true;
+        PauseGame(STATE.Dead);
+        UIManager.Instance.ShowDeathMenu(true);
     }
 
     private void HandlePauseMenu()

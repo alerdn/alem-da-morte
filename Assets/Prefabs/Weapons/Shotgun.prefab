@@ -57,15 +57,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ab1ee93a5ce34439445ce51d054e61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Arma Pesada
+  title: "Shotgun Amaldi\xE7oada"
   description: Dispara lentamente, mas muito mortal
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: e5184564da9225c4e8427438cf60ec84, type: 3}
   simpleWeapon: 0
-  damage: 4
+  damage: 2
   shootPoint: {fileID: 3045449577751106047}
   maxCapacity: 60
   cartridgeCapacity: 12
-  shootPerSeconds: 2
+  shootPerSeconds: 5
   secondsToReload: 2
   totalCapacity: 0
   ammoAmount: 0

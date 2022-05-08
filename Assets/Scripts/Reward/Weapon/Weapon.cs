@@ -20,6 +20,7 @@ public class Weapon : Reward
 
     private Coroutine _isAttacking = null;
     private Coroutine _isReloading = null;
+    private bool _canAttack = true;
 
     private void Start()
     {
@@ -35,6 +36,8 @@ public class Weapon : Reward
 
     IEnumerator Shoot()
     {
+        if (!_canAttack) yield break;
+
         if (ammoAmount > 0)
         {
             var bullet = PlayerBulletManager.Instance.GetBullet();
@@ -64,14 +67,16 @@ public class Weapon : Reward
 
     IEnumerator Reload()
     {
-        yield return new WaitForSeconds(secondsToReload);
-
         int ammoToReload = 0;
         if (totalCapacity <= 0 || ammoAmount == cartridgeCapacity)
         {
             _isReloading = null;
             yield break;
         }
+
+        _canAttack = false;
+        UIManager.Instance.ReloadEffect();
+        yield return new WaitForSeconds(secondsToReload);
 
         /* Se tem municação de sobra, recarrega só o que cabe no cartucho*/
         if (totalCapacity > cartridgeCapacity)
@@ -97,6 +102,7 @@ public class Weapon : Reward
         ammoAmount += ammoToReload;
 
         _isReloading = null;
+        _canAttack = true;
     }
 
     public void RefillCapacity(int c)

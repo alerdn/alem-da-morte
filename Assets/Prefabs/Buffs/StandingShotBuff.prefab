@@ -45,4 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: "Mira est\xE1tica"
   description: Seu dano aumenta ao atacar parado
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: cfb9d27dd8ace0a47961f83660ed8d02, type: 3}
+  damageMultiplier: 1
+  timeToStart: 0.25
