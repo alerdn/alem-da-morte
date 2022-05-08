@@ -1,4 +1,4 @@
-## Play-Jam 🚀
+## Além da Morte 🚀
 O Melhor Jogo feito pela melhor Equipe ▶
 
 ### Versão da Unity 🎮
@@ -18,5 +18,6 @@ Mãe, pandemônio
 Roguelike
 
 ### Descrição
-Você é um cientista buscando a cura para a doença terminal de sua mãe  
-O único lugar que você encontrará o conhecimento em pouco tempo é no Submundo!
+Além da Morte é um top-down shooter, com elementos roguelike,  
+onde você é um cientista ex-militar que fará de tudo para encontrar  
+a cura para a doença de uma de suas mães
